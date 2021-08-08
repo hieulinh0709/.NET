@@ -1,0 +1,41 @@
+.input-w-400 {
+    width: 400px;
+}
+
+.external:not(.highlight-external):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+}
+
+.user_card {
+    height: 500px;
+    width: 450px;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+
+}
+
+.user_card form {
+    width: 85%;
+}
+
+.logo-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
+    text-align: center;
+    background: #fff;
+}
+
+.btn-label {
+    margin-left: 12px;
+    font-weight: 400;
+}
