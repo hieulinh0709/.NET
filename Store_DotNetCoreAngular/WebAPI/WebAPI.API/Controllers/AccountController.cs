@@ -75,7 +75,7 @@ namespace WebAPI.API.Controllers
                 return Ok(new
                 {
                     valid = true,
-                    userInfo = user,
+                    //userInfo = user,
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });
