@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Try jQuery Online</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+   $("em").addClass("selected");
+   $("#myid").addClass("highlight");
+});
+
+</script>
+<style>
+
+.account-passfield {
+    margin-bottom: 0px;
+    position: relative;
+}
+
+
+.account-passfield > .account-passfield-eye {
+    display: inline-block;
+    position: absolute;
+    font-size: 16px;
+    right: 16px;
+    bottom: 9px;
+    cursor: pointer;
+    color: #8854C0;
+}
+
+
+.account-passfield input {
+    display: block;
+    box-sizing: border-box;
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    padding: 0 16px;
+    color: #292A3A;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+</style>
+</head>
+<body>
+    
+    <div>
+        <div class="account-passfield">
+            <span class="account-passfield-eye">
+                 <i class="fas fa-lock"></i>
+            </span>
+            <input type="text" placeholder="******" >
+        </div>
+    </div>
+</body>
+</html>
