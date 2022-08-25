@@ -5,17 +5,17 @@ using Zoo.ZooManagement;
 
 namespace Zoo
 {
-    public abstract class BaseAnimal : IAnimal
+    public class BaseAnimal : IAnimal
     {
         #region properties
-        public event EventHandler<MimicEvent> MimicEvent;
+        public event EventHandler<DetectSoundEvent> DetectSoundEvent;
         public event EventHandler<MakeSoundEvent> MakeSoundEvent;
         public virtual Guid Code { get; set; }
         public virtual string Name { get; set; }
 
         public virtual bool Scary { get; set; }
         public virtual string Sound { get; set; }
-        public bool Souding { get; set; }
+        public virtual bool Sounding { get; set; }
         public virtual Food Food { get; set; }
         protected Cage _cage;
         #endregion properties
@@ -33,7 +33,7 @@ namespace Zoo
         public virtual void Bite(BaseAnimal animal)
         {
             Console.WriteLine($"{this.GetType().Name} {Name} đang cắn {animal.GetType().Name} {animal.Name}");
-            animal.Souding = true;
+            animal.Sounding = true;
             MakeSoundEvent?.Invoke(this, new MakeSoundEvent(animal, animal.Sound));
         }
 
@@ -45,16 +45,15 @@ namespace Zoo
         {
             foreach (var ani in _cage.animals)
             {
-                if (ani.Souding)
+                if (ani.Sounding)
                 {
-                    MimicEvent?.Invoke(this, new MimicEvent(ani, ani.Sound));
+                    DetectSoundEvent?.Invoke(this, new DetectSoundEvent(ani, ani.Sound));
                 }
             }
         }
 
         public virtual void Speak(string sound)
         {
-            //MimicEvent?.Invoke(this, new MimicEvent(this, Sound));
             Console.WriteLine($"{this.GetType().Name} {this.Name} kêu {Sound}...");
         }
 

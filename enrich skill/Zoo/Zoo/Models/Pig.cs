@@ -1,6 +1,5 @@
 ﻿using System;
 using Zoo.EventHelper;
-using Zoo.Helper;
 using Zoo.Interface;
 using Zoo.ZooManagement;
 
@@ -22,7 +21,7 @@ namespace Zoo
             {
                 HaveFoodEvent haveFoodEvent = (HaveFoodEvent)e;
                 Food = haveFoodEvent.Food;
-                if (Food == Food.Meat)
+                if (Food == Food.Meat || Food == Food.Seed)
                 {
                     FightForFood();
                     Eat();

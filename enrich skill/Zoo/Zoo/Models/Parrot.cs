@@ -10,12 +10,12 @@ namespace Zoo
         public override Guid Code { get => base.Code; set => base.Code = value; }
         public override string Name { get => base.Name; set => base.Name = value; }
         public override bool Scary { get => base.Scary; set => base.Scary = value; }
-        public override string Sound { get; set; }
+        public override string Sound { get; set; } = "vẹt vẹt";
 
         public Parrot() {}
         public Parrot(Cage cage)
         {
-            Souding = false;
+            Sounding = false;
             _cage = cage;
             _cage.HaveFoodEvent += (s, e) => 
             {
@@ -38,7 +38,7 @@ namespace Zoo
 
             };
 
-            MimicEvent += MimicPublisher;
+            DetectSoundEvent += MimicPublisher;
         }
 
         public Parrot(Guid code, string name)
@@ -48,7 +48,7 @@ namespace Zoo
         }
         public void MimicPublisher(object sender, EventArgs e)
         {
-            MimicEvent mimicEvent = (MimicEvent)e;
+            DetectSoundEvent mimicEvent = (DetectSoundEvent)e;
             Copy(mimicEvent.Sound);
             //UnSubscribeEvent();
         }
@@ -66,7 +66,7 @@ namespace Zoo
         }
         public void UnSubscribeEvent()
         {
-            MimicEvent -= MimicPublisher;
+            DetectSoundEvent -= MimicPublisher;
         }
     }
 }

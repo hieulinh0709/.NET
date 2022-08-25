@@ -17,7 +17,6 @@ namespace Zoo
             _cage = cage;
             _cage.HaveFoodEvent += (s,e) =>
             {
-                Souding = false;
                 HaveFoodEvent haveFoodEvent = (HaveFoodEvent)e;
                 Food = haveFoodEvent.Food;
                 if (Food == Food.Seed || Food == Food.Meat)
@@ -31,15 +30,13 @@ namespace Zoo
                 MakeSoundEvent makeSoundEvent = (MakeSoundEvent)e;
 
                 makeSoundEvent.Animal.Speak(makeSoundEvent.Sound);
-
             };
-            MimicEvent += MimicPublisher;
-
+            DetectSoundEvent += MimicPublisher;
         }
 
         public void MimicPublisher(object sender, EventArgs e)
         {
-            MimicEvent mimicEvent = (MimicEvent)e;
+            DetectSoundEvent mimicEvent = (DetectSoundEvent)e;
             Copy(mimicEvent.Sound);
             //UnSubscribeEvent();
         }
@@ -63,7 +60,7 @@ namespace Zoo
         }
         public void UnSubscribeEvent()
         {
-            MimicEvent -= MimicPublisher;
+            DetectSoundEvent -= MimicPublisher;
         }
     }
 }

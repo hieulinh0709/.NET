@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Zoo.ZooManagement
 {
@@ -14,6 +11,7 @@ namespace Zoo.ZooManagement
     public class MenuManager
     {
         private readonly ZooManager _zooManager;
+        public MenuManager() { }
         public MenuManager(ZooManager zooManager)
         {
             _zooManager = zooManager;
@@ -26,7 +24,7 @@ namespace Zoo.ZooManagement
         public void HandleSelectCage(List<Cage> cages)
         {
             string cageCode = InputCageCode();
-            Cage cage = _zooManager.FindCage(cages, cageCode);
+            Cage cage = _zooManager.FindCage(cages, Guid.Parse(cageCode));
 
             if (cage == null)
                 throw new ArgumentNullException($"Không tìm thấy Lồng với Mã: {cageCode}");
@@ -69,9 +67,14 @@ namespace Zoo.ZooManagement
             } while (chose != 0);
         }
 
+        public void HandleRemoveCage(List<Cage> cages)
+        {
+            string cageCode = InputCageCode();
+            _zooManager.RemoveCage(cages, Guid.Parse(cageCode));
+        }
         private string InputAnimalCode()
         {
-            Console.WriteLine($"Nhập mã động vật để xóa: ");
+            Console.WriteLine($"Nhập mã động: ");
             bool isValid = true;
             string input = string.Empty;
             do
@@ -86,7 +89,7 @@ namespace Zoo.ZooManagement
         }
         private string InputCageCode()
         {
-            Console.WriteLine($"Nhập mã Lồng để tìm kiếm: ");
+            Console.WriteLine($"Nhập mã Lồng: ");
             bool isValid = true;
             string input = string.Empty;
             do
@@ -143,6 +146,10 @@ namespace Zoo.ZooManagement
             Console.WriteLine("2. Meat");
             int chose = valueChoseInMenu();
 
+            foreach (var animal in cage.animals)
+            {
+                animal.Sounding = false;
+            }
             cage.TimeForEat((Food)chose);
         }
 

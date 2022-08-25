@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Zoo
 {
     public class ZooManager
     {
-        public ZooManager()
-        {
-
-        }
+        public ZooManager() { }
 
         public Cage HandleCreateCage()
         {
@@ -21,6 +16,14 @@ namespace Zoo
 
             return cage;
         }
+
+        public List<Cage> RemoveCage(List<Cage> cages, Guid code)
+        {
+            var cage = FindCage(cages, code);
+            bool removed = cages.Remove(cage);
+            return cages;
+        }
+
         public void RemoveAnimalFromCage(Cage cage, Guid code)
         {
             BaseAnimal animal = cage.animals.Where(a => a.Code == code).FirstOrDefault();
@@ -58,7 +61,7 @@ namespace Zoo
             cage.AddAnimal(animal);
         }
 
-        public Cage FindCage(List<Cage> cages, string cageCode)
+        public Cage FindCage(List<Cage> cages, Guid cageCode)
         {
             return cages.Where(c => c.Code.ToString().Equals(cageCode.ToString())).FirstOrDefault();
         }
@@ -105,7 +108,7 @@ namespace Zoo
             Parrot parrot = new Parrot(cage);
             parrot.Code = Guid.NewGuid();
             parrot.Name = "Dona";
-            animals.AddRange(new List<BaseAnimal> { monkey, parrot, wolf, pig });
+            animals.AddRange(new List<BaseAnimal> { monkey, parrot, wolf, pig, });
 
             return animals;
         }
@@ -122,9 +125,5 @@ namespace Zoo
 
             return animals;
         }
-
-
-
-
     }
 }

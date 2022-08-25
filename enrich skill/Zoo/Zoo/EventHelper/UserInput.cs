@@ -17,8 +17,7 @@ namespace Zoo.EventHelper
             int i = 999;
             do
             {
-                ZooManager zooManager = new ZooManager();
-                MenuManager menuManager = new MenuManager(zooManager);
+                MenuManager menuManager = new MenuManager();
                 menuManager.MenuCage();
                 string input = Console.ReadLine();
                 bool isOK = Int32.TryParse(input, out i);

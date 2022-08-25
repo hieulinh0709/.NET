@@ -12,10 +12,7 @@ namespace Zoo
         public Guid Code { get; set; }
         public string Name { get; set; }
         public List<BaseAnimal> animals { get; set; }
-        public Cage()
-        {
-
-        }
+        public Cage() { }
         public Cage(Guid code, string name)
         {
             Code = code;
@@ -26,11 +23,6 @@ namespace Zoo
         public void TimeForEat(Food food)
         {
             HaveFoodEvent?.Invoke(this, new HaveFoodEvent(food));
-        }
-
-        public void FindAnimals()
-        {
-            Console.WriteLine("Tìm animal");
         }
 
         public void Create()
@@ -60,7 +52,7 @@ namespace Zoo
 
         public void AddAnimal(BaseAnimal animal)
         {
-            animals.Add(animal);
+            animals.Insert(0, animal);
         }
 
         public void ShowInfo()
@@ -76,6 +68,11 @@ namespace Zoo
             {
                 animal.ShowInFo();
             }
+        }
+
+        public void FindAnimals()
+        {
+            Console.WriteLine("Tìm animal");
         }
 
     }

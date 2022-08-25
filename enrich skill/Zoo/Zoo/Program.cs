@@ -13,17 +13,10 @@ namespace Zoo
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.GetEncoding("UTF-8");
-
             ZooManager zooManager = new ZooManager();
             MenuManager menuManager = new MenuManager(zooManager);
-
             List<Cage> cages = zooManager.InitCages();
-
             zooManager.ShowInfoCages(cages);
-            //cages[0].TimeForEat(1);
-
-            //hiển thị màn hình chức năng cho Cage
-            //menuManager.MenuCage();
 
             UserInput userInput = new UserInput();
             userInput.inputEvent += (sender, e) =>
@@ -40,7 +33,8 @@ namespace Zoo
                         menuManager.HandleSelectCage(cages);
                         break;
                     case 3:
-                        //CreateCage();
+                        menuManager.HandleRemoveCage(cages);
+                        zooManager.ShowInfoCages(cages);
                         break;
                     default:
                         break;
