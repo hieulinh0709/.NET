@@ -32,7 +32,6 @@ namespace Zoo
             MakeSoundEvent += (s, e) =>
             {
                 MakeSoundEvent makeSoundEvent = (MakeSoundEvent)e;
-
                 makeSoundEvent.Animal.Speak(makeSoundEvent.Sound);
             };
         }
@@ -47,10 +46,6 @@ namespace Zoo
         {
             Console.WriteLine($"Wolf-{Name} đang ăn {Food}");
         }
-        //public override void Speak(string sound)
-        //{
-        //    Console.WriteLine($"Wolf-{Name} kêu {Sound}");
-        //}
 
         public void FightForFood()
         {

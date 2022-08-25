@@ -38,11 +38,8 @@ namespace Zoo
                 case 1:
                     animal = new Wolf(cage);
                     animal.Create();
-                    //animal.Code = Guid.NewGuid();
-                    //animal.Name = "wolf 3";
                     break;
                 case 2:
-
                     animal = new Pig(cage);
                     animal.Create();
                     break;
@@ -97,14 +94,18 @@ namespace Zoo
             wolf.Code = Guid.NewGuid();
             wolf.Name = "Gear";
 
+            Pig pig = new Pig(cage);
+            pig.Code = Guid.NewGuid();
+            pig.Name = "Peppa";
+
             Monkey monkey = new Monkey(cage);
             monkey.Code = Guid.NewGuid();
             monkey.Name = "Molly";
 
-            Pig pig = new Pig(cage);
-            pig.Code = Guid.NewGuid();
-            pig.Name = "Peppa";
-            animals.AddRange(new List<BaseAnimal> { wolf, pig, monkey });
+            Parrot parrot = new Parrot(cage);
+            parrot.Code = Guid.NewGuid();
+            parrot.Name = "Dona";
+            animals.AddRange(new List<BaseAnimal> { monkey, parrot, wolf, pig });
 
             return animals;
         }

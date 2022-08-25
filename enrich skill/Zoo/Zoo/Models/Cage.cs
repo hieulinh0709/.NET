@@ -8,6 +8,7 @@ namespace Zoo
     public class Cage
     {
         public event EventHandler<HaveFoodEvent> HaveFoodEvent;
+        #region properties
         public Guid Code { get; set; }
         public string Name { get; set; }
         public List<BaseAnimal> animals { get; set; }
@@ -20,33 +21,36 @@ namespace Zoo
             Code = code;
             Name = name;
         }
+        #endregion properties
 
         public void TimeForEat(Food food)
         {
             HaveFoodEvent?.Invoke(this, new HaveFoodEvent(food));
         }
 
-        public void Select()
+        public void FindAnimals()
         {
-            Console.WriteLine("Select Cage");
+            Console.WriteLine("Tìm animal");
         }
 
         public void Create()
         {
             Console.WriteLine("Nhập thông tin để tạo Lồng");
             bool isValid = true;
+            string input = string.Empty;
 
             Code = Guid.NewGuid();
 
             do
             {
                 Console.WriteLine("Name: ");
-                Name = Console.ReadLine();
+                input = Console.ReadLine();
 
-                if (string.IsNullOrWhiteSpace(Name))
+                if (string.IsNullOrWhiteSpace(input))
                     isValid = false;
 
             } while (!isValid);
+            Name = input;
 
         }
         public void DeleteAnimal(BaseAnimal animal)

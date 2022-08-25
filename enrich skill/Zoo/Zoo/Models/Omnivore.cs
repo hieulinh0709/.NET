@@ -11,7 +11,7 @@ namespace Zoo
 
         public override void Eat()
         {
-            Console.WriteLine($"{typeof(Omnivore)} {Name} đang ăn {Food}");
+            //Console.WriteLine($"{typeof(Omnivore)} {Name} đang ăn {Food}");
         }
     }
 }

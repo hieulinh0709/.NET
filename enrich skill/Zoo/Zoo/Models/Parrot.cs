@@ -15,6 +15,7 @@ namespace Zoo
         public Parrot() {}
         public Parrot(Cage cage)
         {
+            Souding = false;
             _cage = cage;
             _cage.HaveFoodEvent += (s, e) => 
             {
@@ -24,19 +25,20 @@ namespace Zoo
                 {
                     Eat();
                 }
-                Copy();
-            };
-            MimicEvent += (s, e) =>
-            {
-                MimicEvent mimicEvent = (MimicEvent)e;
-                foreach (var ani in _cage.animals)
+                else
                 {
-                    if (ani.Souding)
-                    {
-                        Speak(ani.Sound);
-                    }
+                    DetectSound();
                 }
             };
+            MakeSoundEvent += (s, e) =>
+            {
+                MakeSoundEvent makeSoundEvent = (MakeSoundEvent)e;
+
+                makeSoundEvent.Animal.Speak(makeSoundEvent.Sound);
+
+            };
+
+            MimicEvent += MimicPublisher;
         }
 
         public Parrot(Guid code, string name)
@@ -44,17 +46,27 @@ namespace Zoo
             Code = code;
             Name = name;
         }
+        public void MimicPublisher(object sender, EventArgs e)
+        {
+            MimicEvent mimicEvent = (MimicEvent)e;
+            Copy(mimicEvent.Sound);
+            //UnSubscribeEvent();
+        }
         public override void Eat()
         {
             Console.WriteLine($"Parrot-{Name} đang ăn {Food}");
         }
         public override void Speak(string sound)
         {
-            Console.WriteLine($"Parrot-{Name} kêu éc");
+            Console.WriteLine($"Parrot-{Name} kêu {sound}");
         }
-        public void Copy()
+        public void Copy(string skill)
         {
-            DetectSound(null);
+            Speak(skill);
+        }
+        public void UnSubscribeEvent()
+        {
+            MimicEvent -= MimicPublisher;
         }
     }
 }

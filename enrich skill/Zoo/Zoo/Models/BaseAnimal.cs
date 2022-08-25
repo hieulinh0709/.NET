@@ -22,7 +22,7 @@ namespace Zoo
 
         public BaseAnimal() 
         {
-        
+
         }
 
         #region method
@@ -34,21 +34,27 @@ namespace Zoo
         {
             Console.WriteLine($"{this.GetType().Name} {Name} đang cắn {animal.GetType().Name} {animal.Name}");
             animal.Souding = true;
-            DetectSound(animal);
+            MakeSoundEvent?.Invoke(this, new MakeSoundEvent(animal, animal.Sound));
         }
 
         /// <summary>
         /// My comment
         /// </summary>
         /// <param name="animal"></param>
-        public virtual void DetectSound(BaseAnimal animal)
+        public virtual void DetectSound()
         {
-            MakeSoundEvent?.Invoke(this, new MakeSoundEvent(animal, animal.Sound));
-            MimicEvent?.Invoke(this, new MimicEvent(this, Sound));
+            foreach (var ani in _cage.animals)
+            {
+                if (ani.Souding)
+                {
+                    MimicEvent?.Invoke(this, new MimicEvent(ani, ani.Sound));
+                }
+            }
         }
 
         public virtual void Speak(string sound)
         {
+            //MimicEvent?.Invoke(this, new MimicEvent(this, Sound));
             Console.WriteLine($"{this.GetType().Name} {this.Name} kêu {Sound}...");
         }
 

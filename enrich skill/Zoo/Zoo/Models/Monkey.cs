@@ -10,33 +10,38 @@ namespace Zoo
         public override Guid Code { get => base.Code; set => base.Code = value; }
         public override string Name { get => base.Name; set => base.Name = value; }
         public override bool Scary { get => base.Scary; set => base.Scary = value; }
-        public override string Sound { get; set; }
+        public override string Sound { get; set; } = "khỉ khỉ";
         public Monkey() {}
         public Monkey(Cage cage)
         {
             _cage = cage;
-            _cage.HaveFoodEvent += (s,e) => 
+            _cage.HaveFoodEvent += (s,e) =>
             {
+                Souding = false;
                 HaveFoodEvent haveFoodEvent = (HaveFoodEvent)e;
                 Food = haveFoodEvent.Food;
                 if (Food == Food.Seed || Food == Food.Meat)
                 {
                     Eat();
                 }
-                Copy();
+                DetectSound();
             };
-            MimicEvent += (s, e) =>
+            MakeSoundEvent += (s, e) =>
             {
-                MimicEvent mimicEvent = (MimicEvent)e;
-                foreach (var ani in _cage.animals)
-                {
-                    if (ani.Souding)
-                    {
-                        Speak(ani.Sound);
-                    }
-                }
-            };
+                MakeSoundEvent makeSoundEvent = (MakeSoundEvent)e;
 
+                makeSoundEvent.Animal.Speak(makeSoundEvent.Sound);
+
+            };
+            MimicEvent += MimicPublisher;
+
+        }
+
+        public void MimicPublisher(object sender, EventArgs e)
+        {
+            MimicEvent mimicEvent = (MimicEvent)e;
+            Copy(mimicEvent.Sound);
+            //UnSubscribeEvent();
         }
 
         public Monkey(Guid code, string name)
@@ -52,9 +57,13 @@ namespace Zoo
         {
             Console.WriteLine($"Monkey-{Name} kêu {sound}");
         }
-        public void Copy()
+        public void Copy(string skill)
         {
-            DetectSound(null);
+            Speak(skill);
+        }
+        public void UnSubscribeEvent()
+        {
+            MimicEvent -= MimicPublisher;
         }
     }
 }
