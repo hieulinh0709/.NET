@@ -25,10 +25,8 @@ namespace Zoo
                 {
                     Eat();
                 }
-                else
-                {
-                    DetectSound();
-                }
+
+                DetectSound();
             };
             MakeSoundEvent += (s, e) =>
             {
